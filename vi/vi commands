@@ -1,0 +1,205 @@
+GVIM Commands
+
+
+movement commands {m}/*{{{*/
+-, + -- move to first non-blank character previous, next line
+e -- move to end of word
+b -- back a word, punctuation is a word
+w -- forward a word punctuation is a word
+0 -- move to start of line
+^ -- move to first char on line
+$ -- move to end of line
+/{pattern} -- search forwards (esc cancels search, enter jumps to search position)
+?{pattern} -- search backwards
+f{char} -- search forward on current line for next instance of char
+f{char} -- search backward
+t{char} -- same as f, but one char short
+t{char} -- same as f, but one char short
+;, , -- repeat f command in same/opposite direction
+h -- jump to top line of screen (numbers move n lines from top)
+m -- jump to middle of screen
+l -- jump to end of screen (numbers move n lines from bottom)
+{i}| -- jump to ith column of current line
+zj -- move to next fold
+zo -- open fold/*}}}*/
+
+Other Movement/*{{{*/
+G -- go to end of file
+{i}G -- go to ith line of file
+^f -- jump forward one screen (numbers repeat the command)
+^b -- jump backward one screen
+^d -- jump forward half a screen (numbers change it to lines)
+^u -- jump backward half a screen
+zENTER -- scroll current line to top of screen (numbers choose the starting line)
+z. -- scroll current line to middle of screen
+z- -- scroll current line to bottom of screen
+n -- repeat search in same direction (the pattern stays until it is replaced with a new
+pattern)
+N -- repeat search in opposite direction
+/ENTER -- repeat search forward (up and down arrows before enter let you scroll through
+past searches)
+?ENTER -- repeat search backward
+% -- jump to matching paren/brace/comment
+v -- enter visual mode/*}}}*/
+
+Commands/*{{{*/
+. -- repeat whatever the last executed command was (including inserting lots of text)
+d{m} -- cut text
+y{m} -- copy text
+p -- paste text after current position
+P -- paste text on current position (this is how most pastes work)
+o -- new line below (keep editing)
+O -- new line above
+r -- replace 1 character
+x -- delete 1 character
+c{m} -- delete m and go to insert mode
+i -- insert mode
+~ -- toggle case
+u -- undo last command
+^r -- redo last command
+J -- remove \n from current line and add some spaces
+"1pu.u.u. -- try out 3 most recent copy buffers
+!{m}{command} -- pipe selected lines to shell command and replace them with the results of the command
+& -- repeat last substitution
+^T -- indent more
+^D -- indent less
+>> -- shift by shiftwidth spaces
+<< -- same
+= -- fix indent based on configured rules
+g~{m} -- change case over motion
+gj -- like j, but based on screen lines, not file lines
+gn -- find next match with last search pattern and add it to a visual selection
+/*}}}*/
+
+Buffers/*{{{*/
+"{letter}y -- copy into named buffer
+@{letter} -- execute the contents of named buffer as if they were typed/*}}}*/
+
+Marks/*{{{*/
+m{letter} -- set a mark
+`` -- jump to position of previous event (last edit/jump/search)
+'' -- jump to start of line of previous event
+`{letter} -- like ``, but with a mark
+'{letter} -- like '', but with a mark/*}}}*/
+
+Ex Commands/*{{{*/
+" -- the rest of this line is a comment
+:{range}nu -- show line with line number
+:{range}l -- show non-printable characters
+:{range}w >>{file} -- append range to file
+:{range}r {file/!command} -- write the file or stdout of the command into the buffer at range
+:{range}d -- delete lines in a range
+:{range}w !{command} -- pipe data to shell command
+:{range}!{command} -- pipe range to command and replace range with the stdout of the command
+:{range}r {file} -- insert file into the current buffer at range
+:w -- write the current buffer to disk
+:q -- quit
+:{whatever}! -- override safety (for instance quit even if the file needs to be saved)
+:{range}g/{pattern}/{command} -- find all and execute command (eg nu)
+:g!/{pattern}/nu -- reverse grep
+:!{command} -- run command and add stdout to file
+:set all -- list all option configs
+:set -- list customized options
+~ -- means the last search done
+& -- means the full match
+^v -- escapes control characters like backspace and return (e.g., ^vENTER become ^M becomes ENTER)
+:set mouse=a -- make the mouse work in vim (not default)
+:echo "{string}" -- print
+:(l)(vim)grep {regex} {filepattern} -- find all occurences of regex in files matching pattern
+:cw -- open global quick fix list
+:lw -- open local quick fix list
+:^f -- view command history
+/*}}}*/
+
+Buffer and Window Commands/*{{{*/
+:e # -- edit previous file (closes current file)
+:e . -- open directory view, enter opens the highlighted item
+:e {webaddress} -- open resource over http
+:split {file} -- open current file (or file) in a new "window"
+:vsplit -- split vertically instead of horizontally
+:new -- open new file in new window
+^w {m} -- change windows in the direction of the movement m for lower case movements and moves windows for uppercase movements
+^wc -- close the current window (:close)
+^wo -- close all other windows
+^wT -- move current window to new tab
+:ls -- list current buffers (or buffers or files)
+:ls! -- show more info
+:b {n} -- display nth buffer in current window
+:windo {cmd} -- execute cmd in all windows on current tab
+:buffdo {cmd} -- execute cmd in all open buffers
+:tabnew -- open a new tab
+:tabedit {file} open file in a new tab
+:tabclose -- close the current tab
+:tabclose {i} -- close the ith tab
+:tabfind {file} -- edit find located someplace on PATH
+:tab split -- move the current window to its own tab
+:tabn -- next tab
+{i}gt -- next tab (ith)
+^PgDwn -- next tab (works in insert mode, too)
+:tabm {i} -- move current tab to ith position (default is last)
+:bd -- remove buffer from memory and the list
+:bw -- deeper delete than bd
+:Vexplore -- open netrw in current window
+:NERDTree -- open new nerdtree window (there are several variants)/*}}}*/
+
+Ex Range/*{{{*/
+0,. -- first line to current line
+-5,+5 -- 5 lines before current to 5 lines after
+/{string}/;+5 -- from the first occurence of string including the next 5 lines
+5 -- line 5
+. -- current line
+$ -- last line
+% -- all lines
+\{regex token} -- most regex tokens need a single escape character before them (e.g., \+, \{3}, \|)/*}}}*/
+
+Tags/*{{{*/
+^] -- follow a tag
+^t -- go back up a tag
+^w] -- follow tag in new window/*}}}*/
+
+gvim params/*{{{*/
+gvim -d file1 file2 -- do a diff on the two files/*}}}*/
+
+Scripting/*{{{*/
+{str1} . {str2} -- concat str1 and 2
+exe {str} -- execute the command contained in the str variable
+call {function}({arglist}) -- executes a function
+function {name} ({arglist}) ... endfunction -- declare function.  Name must start with a capital letter
+autocmd {stuff} -- set/remove events
+q{buff}{commands}q -- store commands in buffer buff
+{count}@{buff} -- exectute commands in buffer buff/*}}}*/
+
+Completion/*{{{*/
+^x^f -- filename completion
+^x^l -- match whole line from earlier in file
+^n/^p -- move up and down in matches
+^e -- cancel matching
+^x^n -- look for matching word later in file
+^x^k -- look in dictionary for completion
+^x^t -- look in thesaurus for completion/substitution
+^x^i -- look in current file and includes for completion
+^x^p -- look in current file for completion
+^x^] -- look in tags as well
+^x^s -- spelling suggestions on current word (if spell check is enabled)
+ShiftTab -- cycle through options in ex mode
+/*}}}*/
+
+
+Vimdiff commands/*{{{*/
+:diffthis -- has this window become part of diff (will need to run on both windows)
+:diffoff -- deactivate diff mode
+]c -- next change
+[c -- previous change
+do -- change to other window
+dp -- change other window to match this window
+/*}}}*/
+
+Plugins/*{{{*/
+
+vim-tag-comment/*{{{*/
+\tc -- comment out a tag
+\tu -- uncomment a tag
+\tC -- comment out an element
+\tU -- uncomment an element
+/*}}}*/
+/*}}}*/

@@ -1,0 +1,29 @@
+chrome 5 MB recursive:
+354
+355
+355
+357
+366
+357
+356
+
+
+chrome 10 MB recursive:
+188
+350
+194
+189
+188
+188
+
+chrom 1 MB recursive:
+1783
+3491
+1773
+1775
+
+chrome on host 1 MB recursive:
+stopped at 6000
+
+chrome on host 5 MB recursive:
+stopped at 875, chrome was using ~6 GB virtual memory and system was behaving poorly

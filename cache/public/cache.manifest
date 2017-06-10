@@ -1,0 +1,11 @@
+CACHE MANIFEST
+# the preceding line is required
+# version number 3
+
+index.html
+/
+f1
+f2
+f3
+sc1.js
+sc2.js

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html manifest="cache.manifest">
+  <head>
+  </head>
+  <body>
+    The first time the page is loaded, the browser sees the manifest attribute, downloads the manifest file and loads every file listed there.
+
+    The next time the page is loaded, the browser requests the manifest file.  If the file has changed, the browser downloads all the files again, but doesn't change the website display until the next time you go to the page.  If the file hasn't changed, no other files are loaded.
+    <script src="sc1.js"></script>
+    <script src="sc2.js"></script>
+  </body>
+</html>
+

@@ -1,0 +1,5 @@
+{
+  "devDependencies": {
+    "gulp-stylelint": "^3.9.0"
+  }
+}
